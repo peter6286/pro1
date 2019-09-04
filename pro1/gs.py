@@ -67,7 +67,10 @@ def gs_block(men, women, pref, blocked):
         w = pref[m][prefptr[m]]
         prefptr[m] += 1
         if w not in S:
-            S[w] = m
+            if (m,w) not in blocked:
+                S[w] = m
+            else :
+                prefptr[m] += 1
         else:
             mprime = S[w]
             if rank[w][m] < rank[w][mprime]:
@@ -85,7 +88,6 @@ def gs_block(men, women, pref, blocked):
             blocked (list of (man,woman) tuples that are unacceptable matches)
     Output: dictionary of stable matches
     """
-    return "test"
 
 
 #if w not in S:
