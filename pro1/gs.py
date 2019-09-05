@@ -90,13 +90,8 @@ def gs_block(men, women, pref, blocked):
     """
 
 
-#if w not in S:
-#    if (m, w) not in blocked:
-#        S[w] = m
-#    else:
-#        freemen.add(m)
-
 def gs_tie(men, women, preftie):
+
     """
     Gale-shapley algorithm, modified to exclude unacceptable matches
     Inputs: men (list of men's names)
