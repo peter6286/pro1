@@ -91,6 +91,40 @@ def gs_block(men, women, pref, blocked):
 
 
 def gs_tie(men, women, preftie):
+    rank = {}
+    for w in women:
+        rank[w] = {}
+        i = 1
+        for j in range (len(preftie[w])):
+            for m in preftie[w][j]:
+                rank[w][m] = i
+            i += 1
+    ## create a "pointer" to the next woman to propose
+    prefptr = {}
+    for m in men:
+        prefptr[m] = 0
+
+    freemen = set(men)  # initially all men and women are free
+    numpartners = len(men)
+    S = {}  # build dictionary to store engagements
+
+    # run the algorithm
+    while freemen:
+        m = freemen.pop()
+        # get the highest ranked woman that has not yet been proposed to
+        for name in preftie[m][prefptr[m]]:
+         w = name
+        prefptr[m] += 1
+        if w not in S:
+            S[w] = m
+        else:
+            mprime = S[w]
+            if rank[w][m] < rank[w][mprime]:
+                S[w] = m
+                freemen.add(mprime)
+            else:
+                freemen.add(m)
+    return S
 
     """
     Gale-shapley algorithm, modified to exclude unacceptable matches
